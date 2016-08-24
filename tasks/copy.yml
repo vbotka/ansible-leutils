@@ -1,0 +1,7 @@
+---
+
+- name: Create directory for installation {{ leutils_bin_dir }}
+  file: state=directory path={{ leutils_bin_dir }}
+
+- name: Copy scripts to {{ leutils_bin_dir }}
+  shell: cp {{ leutils_source_dest }}/src/lectl {{ leutils_bin_dir }}

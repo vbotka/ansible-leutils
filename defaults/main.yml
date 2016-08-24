@@ -1,0 +1,34 @@
+---
+# default vars for ansible-leutils
+
+# source
+leutils_source_dest: /usr/local/src
+leutils_source_url: https://github.com/vbotka/le-utils/archive
+leutils_source-version: v0.2
+leutils_source_file: v0.2.tar.gz
+leutils_source_dir: le-utils-0.2
+#
+# directories
+leutils_bin_dir: /root/bin
+#
+# configure crontab of
+leutils_cron_user: "root"
+# email will be send to
+leutils_cron_mailto: "root"
+#
+# report certificates that will expire in
+leutils_days: "30"
+# schedule cron daily at
+leutils_days_cron_hour: "2"
+leutils_days_cron_minute: "15"
+#
+# dry-run renewal daily
+leutils_dryrun: "no"
+# schedule cron daily at
+leutils_dryrun_cron_hour: "2"
+leutils_dryrun_cron_minute: "20"
+# NOTE: daily dry-run renewal is recommended
+# https://community.letsencrypt.org/t/help-us-test-renewal-with-letsencrypt-renew/10562
+# Command "/root/bin/lectl -n -c -a" will stop apache during renewal
+#
+# EOF
