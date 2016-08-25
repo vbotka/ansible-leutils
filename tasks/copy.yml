@@ -4,4 +4,6 @@
   file: state=directory path={{ leutils_bin_dir }}
 
 - name: Copy scripts to {{ leutils_bin_dir }}
-  shell: cp {{ leutils_source_dest }}/src/lectl {{ leutils_bin_dir }}
+  copy: src="{{ leutils_source_dest }}/le-utils/lectl"
+        dest="{{ leutils_bin_dir }}/lectl"
+        remote_src="yes"
