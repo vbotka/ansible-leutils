@@ -1,5 +1,5 @@
-leutils
-=========
+leutils ![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)
+=======
 
 Install le-utils from github.com/vbotka/le-utils and configure cron to
 email a list of certificates that will expire in specified number of
