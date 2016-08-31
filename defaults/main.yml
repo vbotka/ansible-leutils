@@ -24,6 +24,7 @@ leutils_days_cron_minute: "15"
 #
 # dry-run renewal daily
 leutils_dryrun: "no"
+leutils_dryrun_command: "/root/bin/lectl -n -c -a"
 # schedule cron daily at
 leutils_dryrun_cron_hour: "2"
 leutils_dryrun_cron_minute: "20"

@@ -16,6 +16,6 @@
   cron: name="dry-run renewal of certificates"
         minute="{{leutils_dryrun_cron_minute}}"
         hour="{{leutils_dryrun_cron_hour}}"
-        job="/root/bin/lectl -n -c -a"
+        job="{{leutils_dryrun_command}}"
         user="{{leutils_cron_user}}"
   when: leutils_dryrun == "yes"
