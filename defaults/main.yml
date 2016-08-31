@@ -4,9 +4,9 @@
 # source
 leutils_source_dest: /usr/local/src
 leutils_source_url: https://github.com/vbotka/le-utils/archive
-leutils_source-version: 0.2.1
-leutils_source_file: 0.2.1.tar.gz
-leutils_source_dir: le-utils-0.2.1
+leutils_source-version: 0.2.2
+leutils_source_file: 0.2.2.tar.gz
+leutils_source_dir: le-utils-0.2.2
 #
 # directories
 leutils_bin_dir: /root/bin
