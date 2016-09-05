@@ -2,10 +2,11 @@ leutils
 =======
 
 [![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
+![license](https://img.shields.io/badge/license-BSD-red.svg)
 
-Install le-utils from github.com/vbotka/le-utils and configure cron to
-email a list of certificates that will expire in specified number of
-days. Optionaly dry-run renewals.
+Ansible role. Install le-utils from github.com/vbotka/le-utils and configure cron to email a list of certificates that will expire in specified number of days. Optionaly dry-run renewals.
+
+https://galaxy.ansible.com/vbotka/ansible-leutils/
 
 
 Requirements.
