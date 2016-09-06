@@ -2,7 +2,7 @@ leutils
 =======
 
 [![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
-![license](https://img.shields.io/badge/license-BSD-red.svg)
+[![license](https://img.shields.io/badge/license-BSD-red.svg)](https://www.freebsd.org/doc/en/articles/bsdl-gpl/article.html)
 
 Ansible role. Install le-utils from github.com/vbotka/le-utils and configure cron to email a list of certificates that will expire in specified number of days. Optionaly dry-run renewals.
 
