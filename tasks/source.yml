@@ -1,13 +1,23 @@
 ---
 
 - name: Create directory for the source code {{ leutils_source_dest }}
-  file: state=directory path={{ leutils_source_dest }}
+  file: >
+    state="directory"
+    path="{{ leutils_source_dest }}"
 
 - name: Download sources from {{ leutils_source_url }}/{{ leutils_source_file }}
-  get_url: url={{ leutils_source_url }}/{{ leutils_source_file }} dest={{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}
+  get_url: >
+    url="{{ leutils_source_url }}/{{ leutils_source_file }}"
+    dest="{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
 
 - name: Extract sources to {{ leutils_source_dest }}
-  unarchive: src={{ leutils_source_dest }}/le-utils-{{ leutils_source_file }} dest={{ leutils_source_dest }} copy="no"
+  unarchive: >
+    src="{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
+    dest="{{ leutils_source_dest }}"
+    copy="no"
 
 - name: Create symbolic link le-utils to {{ leutils_source_dir }}
-  file: src={{ leutils_source_dest }}/{{ leutils_source_dir }} dest={{ leutils_source_dest }}/le-utils state="link"
+  file: >
+    src="{{ leutils_source_dest }}/{{ leutils_source_dir }}"
+    dest="{{ leutils_source_dest }}/le-utils"
+    state="link"

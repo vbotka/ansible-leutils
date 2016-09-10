@@ -1,13 +1,21 @@
 ---
 
 - include: packages.yml
-  tags: [packages, leutils]
+  tags:
+    - leutils-packages
+    - leutils
 
 - include: source.yml
-  tags: [source, leutils]
+  tags:
+    - leutils-source
+    - leutils
 
 - include: copy.yml
-  tags: [copy, leutils]
+  tags:
+    - leutils-copy
+    - leutils
 
 - include: cron.yml
-  tags: [configure, leutils]
+  tags:
+    - leutils-configure
+    - leutils
