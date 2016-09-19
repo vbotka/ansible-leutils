@@ -1,8 +1,18 @@
 ---
 
 - name: Install packages
-  pkgng: name="{{item}}" state="present"
-  with_items:
-    - bash
-    - git
-    - py27-certbot
+  pkgng: >
+    name="{{item}}"
+    state="present"
+  with_items: "{{leutils_packages}}"
+  when: freebsd_install_method == "packages"
+  tags: packages
+
+- name: Install ports
+  portinstall: >
+    name="{{item}}"
+    state="present"
+    use_packages="{{freebsd_use_packages}}"
+  with_items: "{{leutils_packages}}"
+  when: freebsd_install_method == "ports"
+  tags: ports
