@@ -11,14 +11,14 @@ leutils_packages:
   - py27-certbot
 
 # source
-leutils_source_dest: /usr/local/src
-leutils_source_url: https://github.com/vbotka/le-utils/archive
-leutils_source-version: 0.2.3
-leutils_source_file: 0.2.3.tar.gz
-leutils_source_dir: le-utils-0.2.3
+leutils_source_version: "0.2.3"
+leutils_source_file: "{{leutils_source_version}}.tar.gz"
+leutils_source_dir: "le-utils-{{leutils_source_version}}"
+leutils_source_dest: "/usr/local/src"
+leutils_source_url: "https://github.com/vbotka/le-utils/archive"
 #
 # directories
-leutils_bin_dir: /root/bin
+leutils_bin_dir: "/root/bin"
 #
 # configure crontab of
 leutils_cron_user: "root"
