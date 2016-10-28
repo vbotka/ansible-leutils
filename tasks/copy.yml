@@ -1,12 +1,18 @@
 ---
 
-- name: Create directory for installation {{ leutils_bin_dir }}
-  file: state=directory path={{ leutils_bin_dir }}
+- name: Create directory for installation {{leutils_bin_dir}}
+  file: >
+    state="directory"
+    path="{{leutils_bin_dir}}"
 
-- name: Copy scripts to {{ leutils_bin_dir }}
-  copy: src="{{ leutils_source_dest }}/le-utils/lectl"
-        dest="{{ leutils_bin_dir }}/lectl"
-        remote_src="yes"
-        owner="root"
-        group="wheel"
-        mode="755"
+- name: Copy scripts to {{leutils_bin_dir}}
+  copy: >
+    src="{{ leutils_source_dest }}/le-utils/lectl"
+    dest="{{ leutils_bin_dir }}/lectl"
+    remote_src="yes"
+    owner="root"
+    group="wheel"
+    mode="755"
+
+# EOF
+...
