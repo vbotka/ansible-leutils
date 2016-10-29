@@ -7,12 +7,12 @@
 
 - name: Copy scripts to {{leutils_bin_dir}}
   copy: >
-    src="{{ leutils_source_dest }}/le-utils/lectl"
-    dest="{{ leutils_bin_dir }}/lectl"
+    src="{{leutils_source_dest}}/le-utils/lectl"
+    dest="{{leutils_bin_dir}}/lectl"
     remote_src="yes"
     owner="root"
     group="wheel"
-    mode="755"
+    mode="0755"
 
 # EOF
 ...

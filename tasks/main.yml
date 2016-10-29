@@ -10,6 +10,11 @@
     - leutils_source
     - leutils_all
 
+- include: config.yml
+  tags:
+    - leutils_config
+    - leutils_all
+
 - include: copy.yml
   tags:
     - leutils_copy
