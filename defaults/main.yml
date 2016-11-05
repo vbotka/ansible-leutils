@@ -33,7 +33,7 @@ leutils_cron_mailto: "root"
 
 # list of certificates scheduled daily
 leutils_days: "30"
-leutils_list_command: "/root/bin/lectl -e --Days={{leutils_days}} -a"
+leutils_list_command: "/root/bin/leinfo -e --Days={{leutils_days}} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 
