@@ -11,7 +11,7 @@ leutils_packages:
   - py27-certbot
 
 # source
-leutils_source_version: "0.2.4"
+leutils_source_version: "0.3.0"
 leutils_source_file: "{{leutils_source_version}}.tar.gz"
 leutils_source_dir: "le-utils-{{leutils_source_version}}"
 leutils_source_dest: "/usr/local/src"
