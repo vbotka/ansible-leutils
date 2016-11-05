@@ -5,13 +5,15 @@
     dest="{{leutils_config_file}}"
     regexp="{{item.regexp}}"
     line="{{item.line}}"
+    owner="{{leutils_owner}}"
+    group="{{leutils_group}}"
+    mode="{{leutils_config_mode}}"
     backup="yes"
     create="yes"
-    owner="{{leutils_config_file_owner}}"
-    group="{{leutils_config_file_group}}"
-    mode="{{leutils_config_file_mode}}"
   with_items:
     - { regexp: "^WEBSERVER=", line: "WEBSERVER=\"{{leutils_config_WEBSERVER}}\""}
+    - { regexp: "^LEROOT=", line: "LEROOT=\"{{leutils_config_LEROOT}}\""}
+    - { regexp: "^FINGERPRINTFILE=", line: "FINGERPRINTFILE=\"{{leutils_config_FINGERPRINTFILE}}\""}
   tags: config_lectl
 
 # EOF

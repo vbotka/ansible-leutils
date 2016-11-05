@@ -20,6 +20,11 @@
     - leutils_copy
     - leutils_all
 
+- include: fingerprint.yml
+  tags:
+    - leutils_fingerprint
+    - leutils_all
+
 - include: cron.yml
   tags:
     - leutils_cron
