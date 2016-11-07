@@ -13,6 +13,7 @@
     hour="{{leutils_days_cron_hour}}"
     job="{{leutils_list_command}}"
     user="{{leutils_cron_user}}"
+  when: leutils_days_enable == "yes"
 
 - name: Configure cron dry-run renewal of certificates
   cron: >
@@ -23,5 +24,24 @@
     user="{{leutils_cron_user}}"
   when: leutils_dryrun == "yes"
 
+- name: Create script to renew certificates
+  template: >
+    src="renew-certificates.j2"
+    dest="{{leutils_bin_dir}}/renew-certificates.sh"
+    owner="{{leutils_owner}}"
+    group="{{leutils_group}}"
+    mode="{{leutils_bin_mode}}"
+    backup="yes"
+  when: leutils_renew == "yes"
+
+- name: Configure cron renewal of certificates
+  cron: >
+    name="renewal of certificates"
+    minute="{{leutils_renew_cron_minute}}"
+    hour="{{leutils_renew_cron_hour}}"
+    job="{{leutils_renew_command}}"
+    user="{{leutils_cron_user}}"
+  when: leutils_renew == "yes"
+  
 # EOF
 ...

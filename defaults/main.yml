@@ -11,7 +11,7 @@ leutils_packages:
   - py27-certbot
 
 # source
-leutils_source_version: "0.3.0"
+leutils_source_version: "0.3.1"
 leutils_source_file: "{{leutils_source_version}}.tar.gz"
 leutils_source_dir: "le-utils-{{leutils_source_version}}"
 leutils_source_dest: "/usr/local/src"
@@ -46,6 +46,7 @@ leutils_cron_mailto: "root"
 
 # cron list of certificates scheduled daily
 leutils_days: "30"
+leutils_days_enable: "yes"
 leutils_list_command: "{{leutils_bin_dir}}/leinfo -e --Days={{leutils_days}} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
@@ -58,6 +59,12 @@ leutils_dryrun_cron_minute: "20"
 # NOTE: daily dry-run renewal is recommended
 # https://community.letsencrypt.org/t/help-us-test-renewal-with-letsencrypt-renew/10562
 # Command "/root/bin/lectl -n -c -a" will stop apache during renewal
+
+# cron renewal of certificates when expiry in less then 30 days scheduled daily
+leutils_renew: "no"
+leutils_renew_command: "{{leutils_bin_dir}}/renew-certificates.sh"
+leutils_renew_cron_hour: "3"
+leutils_renew_cron_minute: "20"
 
 # EOF
 ...
