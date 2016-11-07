@@ -3,8 +3,11 @@ leutils
 
 [![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
 
-[Ansible role.](https://galaxy.ansible.com/vbotka/ansible-leutils/) Install le-utils from https://github.com/vbotka/le-utils and configure cron to email a list of certificates that will expire in specified number of days. Optionaly dry-run renewal of the certificates.
+[Ansible role.](https://galaxy.ansible.com/vbotka/ansible-leutils/) Install le-utils from https://github.com/vbotka/le-utils and configure cron to:
 
+- email a list of certificates that will expire in specified number of days.
+- optionaly dry-run renewal of the certificates.
+- optionaly renew if there are certificates due for renewal.
 
 Requirements.
 ------------
@@ -47,10 +50,14 @@ Command
 will stop apache during renewal.
 
 
-TODO
-----
+Renewal.
+--------
 
-  - Renewal. Cron entry to renew certificates 30 days before expiration.
+Set
+```
+leutils_renew: "yes"
+```
+to enable renewal and review the template renew-certificates.j2
 
 
 
