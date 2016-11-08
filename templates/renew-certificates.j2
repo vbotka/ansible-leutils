@@ -1,33 +1,35 @@
 #!/usr/local/bin/bash
 #set -x
 
+LEINFO="{{leutils_bin_dir}}/leinfo"
+APACHECTL="/usr/local/sbin/apachectl"
 RESTART="0"
 
 function apache-status {
-    if [ -e "/usr/local/sbin/apachectl" ]; then
-	if (/usr/local/sbin/apachectl status | grep "is running"); then
+    if [ -e "$APACHECTL" ]; then
+	if ( $APACHECTL status | grep "is running"); then
 	    RESTART=1
 	fi
     fi
 }
 
 function apache-stop {
-    if [ -e "/usr/local/sbin/apachectl" ]; then
-	(($RESTART)) && /usr/local/sbin/apachectl -k graceful-stop
+    if [ -e "$APACHECTL" ]; then
+	(($RESTART)) && $APACHECTL -k graceful-stop
     fi
 }
 
 function apache-restart {
-    if [ -e "/usr/local/sbin/apachectl" ]; then
-	(($RESTART)) && /usr/local/sbin/apachectl -k graceful
+    if [ -e "$APACHECTL" ]; then
+	(($RESTART)) && $APACHECTL -k graceful
     fi
 }
 
 
-for i in `leinfo -l`; do
-    d=`leinfo -e -s $i`
+for i in `$LEINFO -l`; do
+    d=`$LEINFO -e -s $i`
     if [ "$d" -lt "{{leutils_days}}" ]; then
-	printf "*** Renew certificates\n"
+	printf "* Renew certificates\n"
 	apache-status
 	apache-stop
 	certbot renew
