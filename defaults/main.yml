@@ -11,7 +11,7 @@ leutils_packages:
   - py27-certbot
 
 # source
-leutils_source_version: "0.3.2"
+leutils_source_version: "0.3.3"
 leutils_source_file: "{{leutils_source_version}}.tar.gz"
 leutils_source_dir: "le-utils-{{leutils_source_version}}"
 leutils_source_dest: "/usr/local/src"
@@ -63,7 +63,7 @@ leutils_dryrun_cron_minute: "20"
 # cron renewal of certificates when expiry in less then 30 days scheduled daily
 leutils_renew: "no"
 #leutils_renew_command: "{{leutils_bin_dir}}/renew-certificates.sh"
-leutils_renew_command: "{{leutils_bin_dir}}/lectl -c -a"
+leutils_renew_command: "{{leutils_bin_dir}}/lectl -D=30 -c -a"
 leutils_renew_cron_hour: "3"
 leutils_renew_cron_minute: "20"
 
