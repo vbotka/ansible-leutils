@@ -32,5 +32,21 @@
   when: leutils_current_lock.stat.exists == False or
         leutils_source_ignore_current_lock == "yes"
 
+- name: Which bash
+  command: "which bash"
+  register: leutils_which_bash
+  changed_when: false
+
+  #- debug: msg="{{leutils_which_bash.stdout}}"
+
+- name: Patch {{leutils_which_bash.stdout}}
+  lineinfile: >
+    dest="{{leutils_bin_dir}}/{{item}}"
+    regexp="#!"
+    line="#!{{leutils_which_bash.stdout}}"
+  with_items:
+    - lectl
+    - leinfo
+
 # EOF
 ...
