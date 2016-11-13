@@ -16,6 +16,7 @@ leutils_source_file: "{{leutils_source_version}}.tar.gz"
 leutils_source_dir: "le-utils-{{leutils_source_version}}"
 leutils_source_dest: "/usr/local/src"
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"
+leutils_source_ignore_current_lock: "yes"
 
 # directories, owner, group and permissions
 leutils_owner: "root"

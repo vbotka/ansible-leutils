@@ -2,10 +2,11 @@
 
 - name: Test presence of {{leutils_source_dest}}/le-utils-current.lock
   stat: path="{{leutils_source_dest}}/le-utils-current.lock"
-  register: le_utils_current_lock
+  register: leutils_current_lock
 
 - debug: msg="[LOCK] le-utils-current.lock file is present. Scripts will no be copied."
-  when: le_utils_current_lock.stat.exists == True
+  when: leutils_current_lock.stat.exists == True and
+        leutils_source_ignore_current_lock == "no"
 
 - name: Create directory for installation {{leutils_bin_dir}}
   file: >
@@ -14,7 +15,8 @@
     owner="{{leutils_owner}}"
     group="{{leutils_group}}"
     mode="{{leutils_bin_dir_mode}}"
-  when: le_utils_current_lock.stat.exists == False
+  when: leutils_current_lock.stat.exists == False or
+        leutils_source_ignore_current_lock == "yes"
 
 - name: Copy scripts to {{leutils_bin_dir}}
   copy: >
@@ -27,7 +29,8 @@
   with_items:
     - lectl
     - leinfo
-  when: le_utils_current_lock.stat.exists == False
+  when: leutils_current_lock.stat.exists == False or
+        leutils_source_ignore_current_lock == "yes"
 
 # EOF
 ...
