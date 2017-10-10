@@ -14,13 +14,34 @@
   unarchive: >
     src="{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     dest="{{ leutils_source_dest }}"
-    copy="no"
+    remote_src="yes"
+    extra_opts="--skip-old-files"
+  changed_when: False
+# TODO: Wait for fixed idempotent unarchive module
 
 - name: Create symbolic link le-utils to {{ leutils_source_dir }}
   file: >
     src="{{ leutils_source_dest }}/{{ leutils_source_dir }}"
     dest="{{ leutils_source_dest }}/le-utils"
     state="link"
+    force="yes"
+
+- name: Which bash
+  command: "which bash"
+  register: leutils_which_bash
+  changed_when: false
+
+#- debug: msg="{{ leutils_which_bash.stdout }}"
+
+- name: Patch {{ leutils_which_bash.stdout }}
+  lineinfile: >
+    dest="{{ leutils_source_dest }}/le-utils/{{ item }}"
+    regexp="#!"
+    line="#!{{ leutils_which_bash.stdout }}"
+  with_items:
+    - lectl
+    - leinfo
+  when: not ansible_check_mode
 
 # EOF
 ...

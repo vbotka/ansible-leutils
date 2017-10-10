@@ -18,7 +18,9 @@
       
       {{leutils_fingerprint_values.stdout}}
       
-  when: leutils_fingerprint == "yes"
+  when:
+    - leutils_fingerprint == "yes"
+    - not ansible_check_mode
   
 # EOF
 ...
