@@ -16,8 +16,7 @@
     dest="{{ leutils_source_dest }}"
     remote_src="yes"
     extra_opts="--skip-old-files"
-  changed_when: False
-# TODO: Wait for fixed idempotent unarchive module
+  tags: leutils_extract_sources
 
 - name: Create symbolic link le-utils to {{ leutils_source_dir }}
   file: >

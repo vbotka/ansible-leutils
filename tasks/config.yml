@@ -1,20 +1,38 @@
 ---
 
-- name: Create configuration in {{leutils_config_file}}
+- name: Create configuration in {{ leutils_config_file }}
   lineinfile: >
-    dest="{{leutils_config_file}}"
-    regexp="{{item.regexp}}"
-    line="{{item.line}}"
-    owner="{{leutils_owner}}"
-    group="{{leutils_group}}"
-    mode="{{leutils_config_mode}}"
+    dest="{{ leutils_config_file }}"
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+    owner="{{ leutils_owner }}"
+    group="{{ leutils_group }}"
+    mode="{{ leutils_config_mode }}"
     backup="yes"
     create="yes"
   with_items:
-    - { regexp: "^WEBSERVER=", line: "WEBSERVER=\"{{leutils_config_WEBSERVER}}\""}
-    - { regexp: "^LEROOT=", line: "LEROOT=\"{{leutils_config_LEROOT}}\""}
-    - { regexp: "^FINGERPRINTFILE=", line: "FINGERPRINTFILE=\"{{leutils_config_FINGERPRINTFILE}}\""}
-  tags: config_lectl
+    - { regexp: "^WEBSERVER=", line: "WEBSERVER=\"{{ leutils_config_WEBSERVER }}\""}
+    - { regexp: "^LEROOT=", line: "LEROOT=\"{{ leutils_config_LEROOT }}\""}
+    - { regexp: "^FINGERPRINTFILE=", line: "FINGERPRINTFILE=\"{{ leutils_config_FINGERPRINTFILE }}\""}
+  tags: leutils_config_lectl
+
+- name: Create directory {{ leutils_config_LEROOT }}
+  file: >
+    state="directory"
+    path="{{ leutils_config_LEROOT }}"
+    owner="{{ leutils_owner }}"
+    group="{{ leutils_group }}"
+    mode="{{ leutils_LEROOT_mode }}"
+  tags: leutils_create_leroot
+
+- name: Create directory {{ leutils_config_LEROOT }}/live
+  file: >
+    state="directory"
+    path="{{ leutils_config_LEROOT }}/live"
+    owner="{{ leutils_owner }}"
+    group="{{ leutils_group }}"
+    mode="{{ leutils_LEROOT_live_mode }}"
+  tags: leutils_create_leroot_live
 
 # EOF
 ...
