@@ -1,22 +1,22 @@
 ---
 
 - name: Get fingerprints
-  command: "{{leutils_fingerprint_command}}"
+  command: "{{ leutils_fingerprint_command }}"
   register: leutils_fingerprint_values
   changed_when: false
   when: leutils_fingerprint == "yes"
 
-- name: Create {{leutils_config_FINGERPRINTFILE}}
+- name: Create {{ leutils_config_FINGERPRINTFILE }}
   blockinfile:
-    dest: "{{leutils_config_FINGERPRINTFILE}}"
-    owner: "{{leutils_owner}}"
-    group: "{{leutils_group}}"
-    mode: "{{leutils_fingerprint_mode}}"
+    dest: "{{ leutils_config_FINGERPRINTFILE }}"
+    owner: "{{ leutils_owner }}"
+    group: "{{ leutils_group }}"
+    mode: "{{ leutils_fingerprint_mode }}"
     create: "yes"
     backup: "yes"
     block: |
       
-      {{leutils_fingerprint_values.stdout}}
+      {{ leutils_fingerprint_values.stdout }}
       
   when:
     - leutils_fingerprint == "yes"

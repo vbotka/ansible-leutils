@@ -2,6 +2,8 @@
 
 - include: packages.yml
   tags:
+    - bsd_packages
+    - bsd_ports
     - leutils_packages
     - leutils_all
 
