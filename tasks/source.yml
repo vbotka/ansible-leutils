@@ -16,7 +16,10 @@
     dest="{{ leutils_source_dest }}"
     remote_src="yes"
     extra_opts="--skip-old-files"
+  changed_when: False
+  when: not ansible_check_mode
   tags: leutils_extract_sources
+# TODO: Wait for fixed idempotent unarchive module
 
 - name: Create symbolic link le-utils to {{ leutils_source_dir }}
   file: >
