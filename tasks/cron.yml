@@ -1,9 +1,9 @@
 ---
 
-- name: Configure cron MAILTO="{{ leutils_cron_mailto }}"
+- name: Configure cron MAILTO={{ leutils_cron_mailto }}
   cronvar: >
     name="MAILTO"
-    value="\"{{ leutils_cron_mailto }}\""
+    value="{{ leutils_cron_mailto }}"
     user="{{ leutils_cron_user }}"
 
 - name: Configure cron check expiry of certificates

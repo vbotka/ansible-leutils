@@ -25,8 +25,8 @@ leutils_bin_dir: "/root/bin"
 leutils_bin_dir_mode: "0755"
 leutils_bin_mode: "0755"
 leutils_config_mode: "0644"
-leutils_LEROOT_mode: "0644"
-leutils_LEROOT_live_mode: "0600"
+leutils_LEROOT_mode: "0755"
+leutils_LEROOT_live_mode: "0700"
 leutils_fingerprint_mode: "0644"
 
 # configure lectl
