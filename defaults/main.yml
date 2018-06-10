@@ -39,7 +39,7 @@ leutils_config_LEROOT: "/usr/local/etc/letsencrypt"
 leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
 
 # create file with fingerprints of the certificates
-leutils_fingerprint: "yes"
+leutils_fingerprint: True
 leutils_fingerprint_file: "FINGERPRINT"
 leutils_fingerprint_command: "{{ leutils_bin_dir }}/leinfo -f -a"
 
@@ -49,13 +49,13 @@ leutils_cron_mailto: "root"
 
 # cron list of certificates scheduled daily
 leutils_days: "30"
-leutils_days_enable: "yes"
+leutils_days_enable: True
 leutils_list_command: "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 
 # cron dry-run renewal of certificates scheduled daily
-leutils_dryrun: "no"
+leutils_dryrun: False
 leutils_dryrun_command: "{{ leutils_bin_dir }}/lectl -n -c -a"
 leutils_dryrun_cron_hour: "2"
 leutils_dryrun_cron_minute: "20"
@@ -64,7 +64,7 @@ leutils_dryrun_cron_minute: "20"
 # Command "/root/bin/lectl -n -c -a" will stop apache during renewal
 
 # cron renewal of certificates when expiry in less then 30 days scheduled daily
-leutils_renew: "no"
+leutils_renew: False
 #leutils_renew_command: "{{ leutils_bin_dir }}/renew-certificates.sh"
 leutils_renew_command: "{{ leutils_bin_dir }}/lectl -D=30 -c -a"
 leutils_renew_cron_hour: "3"

@@ -1,36 +1,22 @@
 ---
 
 - include: packages.yml
-  tags:
-    - bsd_packages
-    - bsd_ports
-    - leutils_packages
-    - leutils_all
+  tags: leutils_packages
 
 - include: source.yml
-  tags:
-    - leutils_source
-    - leutils_all
+  tags: leutils_source
 
 - include: config.yml
-  tags:
-    - leutils_config
-    - leutils_all
+  tags: leutils_config
 
 - include: copy.yml
-  tags:
-    - leutils_copy
-    - leutils_all
+  tags: leutils_copy
 
 - include: fingerprint.yml
-  tags:
-    - leutils_fingerprint
-    - leutils_all
+  tags: leutils_fingerprint
 
 - include: cron.yml
-  tags:
-    - leutils_cron
-    - leutils_all
+  tags: leutils_cron
 
 # EOF
 ...

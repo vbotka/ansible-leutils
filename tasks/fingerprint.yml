@@ -1,12 +1,12 @@
 ---
 
-- name: Get fingerprints
+- name: "fingerprint: Get fingerprints"
   command: "{{ leutils_fingerprint_command }}"
   register: leutils_fingerprint_values
-  changed_when: false
-  when: leutils_fingerprint == "yes"
+  changed_when: False
+  when: leutils_fingerprint
 
-- name: Create {{ leutils_config_FINGERPRINTFILE }}
+- name: "fingerprint: Create {{ leutils_config_FINGERPRINTFILE }}"
   blockinfile:
     dest: "{{ leutils_config_FINGERPRINTFILE }}"
     owner: "{{ leutils_owner }}"
@@ -19,7 +19,7 @@
       {{ leutils_fingerprint_values.stdout }}
       
   when:
-    - leutils_fingerprint == "yes"
+    - leutils_fingerprint
     - not ansible_check_mode
   
 # EOF

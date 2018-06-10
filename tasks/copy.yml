@@ -1,36 +1,40 @@
 ---
 
-- name: Test presence of {{ leutils_source_dest }}/le-utils-current.lock
-  stat: path="{{ leutils_source_dest }}/le-utils-current.lock"
+- name: "copy: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
+  stat:
+    path: "{{ leutils_source_dest }}/le-utils-current.lock"
   register: leutils_current_lock
 
 - debug: msg="[LOCK] le-utils-current.lock file is present. Scripts will no be copied."
-  when: leutils_current_lock.stat.exists == True and
-        leutils_source_ignore_current_lock == "no"
+  when:
+    - leutils_current_lock.stat.exists
+    - not leutils_source_ignore_current_lock
 
-- name: Create directory for installation {{ leutils_bin_dir }}
-  file: >
-    state="directory"
-    path="{{ leutils_bin_dir }}"
-    owner="{{ leutils_owner }}"
-    group="{{ leutils_group }}"
-    mode="{{ leutils_bin_dir_mode }}"
-  when: leutils_current_lock.stat.exists == False or
-        leutils_source_ignore_current_lock == "yes"
+- name: "copy: Create directory for installation {{ leutils_bin_dir }}"
+  file:
+    state: "directory"
+    path: "{{ leutils_bin_dir }}"
+    owner: "{{ leutils_owner }}"
+    group: "{{ leutils_group }}"
+    mode: "{{ leutils_bin_dir_mode }}"
+  when: (not leutils_current_lock.stat.exists) or
+        leutils_source_ignore_current_lock
 
-- name: Copy scripts to {{ leutils_bin_dir }}
-  copy: >
-    src="{{ leutils_source_dest }}/le-utils/{{ item }}"
-    dest="{{ leutils_bin_dir }}/{{ item }}"
-    remote_src="yes"
-    owner="{{ leutils_owner }}"
-    group="{{ leutils_group }}"
-    mode="{{ leutils_bin_mode }}"
+- name: "copy: Copy scripts to {{ leutils_bin_dir }}"
+  copy:
+    src: "{{ leutils_source_dest }}/le-utils/{{ item }}"
+    dest: "{{ leutils_bin_dir }}/{{ item }}"
+    owner: "{{ leutils_owner }}"
+    group: "{{ leutils_group }}"
+    mode: "{{ leutils_bin_mode }}"
+    remote_src: yes
   with_items:
     - lectl
     - leinfo
-  when: leutils_current_lock.stat.exists == False or
-        leutils_source_ignore_current_lock == "yes"
+  when:
+    - (not leutils_current_lock.stat.exists) or
+      leutils_source_ignore_current_lock
+    - not ansible_check_mode
 
 # EOF
 ...

@@ -1,45 +1,44 @@
 ---
 
-- name: Create directory for the source code {{ leutils_source_dest }}
-  file: >
-    state="directory"
-    path="{{ leutils_source_dest }}"
+- name: "source: Create directory for the source code {{ leutils_source_dest }}"
+  file:
+    state: "directory"
+    path: "{{ leutils_source_dest }}"
 
-- name: Download sources from {{ leutils_source_url }}/{{ leutils_source_file }}
-  get_url: >
-    url="{{ leutils_source_url }}/{{ leutils_source_file }}"
-    dest="{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
+- name: "source: Download sources from {{ leutils_source_url }}/{{ leutils_source_file }}"
+  get_url:
+    url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
+    dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
 
-- name: Extract sources to {{ leutils_source_dest }}
-  unarchive: >
-    src="{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
-    dest="{{ leutils_source_dest }}"
-    remote_src="yes"
-    extra_opts="--skip-old-files"
+- name: "source: Extract sources to {{ leutils_source_dest }}"
+  unarchive:
+    src: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
+    dest: "{{ leutils_source_dest }}"
+    extra_opts: "--skip-old-files"
+    remote_src: yes
   changed_when: False
   when: not ansible_check_mode
-  tags: leutils_extract_sources
 # TODO: Wait for fixed idempotent unarchive module
 
-- name: Create symbolic link le-utils to {{ leutils_source_dir }}
-  file: >
-    src="{{ leutils_source_dest }}/{{ leutils_source_dir }}"
-    dest="{{ leutils_source_dest }}/le-utils"
-    state="link"
-    force="yes"
+- name: "source: Create symbolic link le-utils to {{ leutils_source_dir }}"
+  file:
+    src: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
+    dest: "{{ leutils_source_dest }}/le-utils"
+    state: "link"
+    force: yes
 
-- name: Which bash
+- name: "source: Which bash"
   command: "which bash"
   register: leutils_which_bash
-  changed_when: false
+  changed_when: False
 
 #- debug: msg="{{ leutils_which_bash.stdout }}"
 
-- name: Patch {{ leutils_which_bash.stdout }}
-  lineinfile: >
-    dest="{{ leutils_source_dest }}/le-utils/{{ item }}"
-    regexp="#!"
-    line="#!{{ leutils_which_bash.stdout }}"
+- name: "source: Patch {{ leutils_which_bash.stdout }}"
+  lineinfile:
+    dest: "{{ leutils_source_dest }}/le-utils/{{ item }}"
+    regexp: "#!"
+    line: "#!{{ leutils_which_bash.stdout }}"
   with_items:
     - lectl
     - leinfo
