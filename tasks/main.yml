@@ -1,21 +1,21 @@
 ---
 
-- include: packages.yml
+- import_tasks: packages.yml
   tags: leutils_packages
 
-- include: source.yml
+- import_tasks: source.yml
   tags: leutils_source
 
-- include: config.yml
+- import_tasks: config.yml
   tags: leutils_config
 
-- include: copy.yml
+- import_tasks: copy.yml
   tags: leutils_copy
 
-- include: fingerprint.yml
+- import_tasks: fingerprint.yml
   tags: leutils_fingerprint
 
-- include: cron.yml
+- import_tasks: cron.yml
   tags: leutils_cron
 
 # EOF

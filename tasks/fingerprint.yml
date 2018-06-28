@@ -12,8 +12,8 @@
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
     mode: "{{ leutils_fingerprint_mode }}"
-    create: "yes"
-    backup: "yes"
+    create: yes
+    backup: yes
     block: |
       
       {{ leutils_fingerprint_values.stdout }}
