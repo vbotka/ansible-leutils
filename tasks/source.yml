@@ -3,12 +3,12 @@
 - name: "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-current.lock"
-  register: leutils_current_lock
+  register: leutils_lock
 
 - debug: msg="DEBUG le-utils-current.lock file is present."
   when:
-    - leutils_current_lock.stat.exists
-    - not leutils_source_ignore_current_lock
+    - leutils_lock.stat.exists
+    - not leutils_ignore_lock
     - leutils_debug
 
 - name: "source: Create directory for the source code {{ leutils_source_dest }}"
@@ -28,14 +28,18 @@
     extra_opts: "--skip-old-files"
     remote_src: yes
 
+- debug:
+    msg: "leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ] leutils_ignore_lock [ {{ leutils_ignore_lock }} ]"
+  when: leutils_debug
+
 - name: "source: Create symbolic link le-utils to {{ leutils_source_dir }}"
   file:
     src: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
     dest: "{{ leutils_source_dest }}/le-utils"
     state: link
     force: yes
-  when: (not leutils_current_lock.stat.exists) or
-         leutils_source_ignore_current_lock
+  when: (not leutils_lock.stat.exists) or
+         leutils_ignore_lock
 
 - name: "source: Which bash"
   command: "which bash"
