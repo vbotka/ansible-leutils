@@ -10,14 +10,14 @@
     mode: "{{ leutils_config_mode }}"
     backup: yes
     create: yes
-  with_items:
+  loop:
     - { regexp: "^WEBSERVER=", line: "WEBSERVER=\"{{ leutils_config_WEBSERVER }}\""}
     - { regexp: "^LEROOT=", line: "LEROOT=\"{{ leutils_config_LEROOT }}\""}
     - { regexp: "^FINGERPRINTFILE=", line: "FINGERPRINTFILE=\"{{ leutils_config_FINGERPRINTFILE }}\""}
 
 - name: "config: Create directory {{ leutils_config_LEROOT }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ leutils_config_LEROOT }}"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
@@ -25,7 +25,7 @@
 
 - name: "config: Create directory {{ leutils_config_LEROOT }}/live"
   file:
-    state: "directory"
+    state: directory
     path: "{{ leutils_config_LEROOT }}/live"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"

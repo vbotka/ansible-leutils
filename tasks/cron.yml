@@ -32,7 +32,6 @@
     group: "{{ leutils_group }}"
     mode: "{{ leutils_bin_mode }}"
     backup: yes
-  when: leutils_renew
 
 - name: "cron: Configure cron renewal of certificates"
   cron:

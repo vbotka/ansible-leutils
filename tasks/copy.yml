@@ -13,7 +13,7 @@
 
 - name: "copy: Create directory for installation {{ leutils_bin_dir }}"
   file:
-    state: "directory"
+    state: directory
     path: "{{ leutils_bin_dir }}"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
@@ -27,7 +27,7 @@
     group: "{{ leutils_group }}"
     mode: "{{ leutils_bin_mode }}"
     remote_src: yes
-  with_items:
+  loop:
     - lectl
     - leinfo
   when:
