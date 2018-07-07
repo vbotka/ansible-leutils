@@ -5,7 +5,8 @@
     path: "{{ leutils_source_dest }}/le-utils-current.lock"
   register: leutils_lock
 
-- debug: msg="[LOCK] le-utils-current.lock file is present. Scripts will no be copied."
+- debug:
+    msg: "copy: [LOCK] le-utils-current.lock file is present. Scripts will no be copied."
   when:
     - leutils_lock.stat.exists
     - not leutils_ignore_lock
