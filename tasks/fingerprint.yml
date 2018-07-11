@@ -8,6 +8,7 @@
 
 - name: "fingerprint: Create {{ leutils_config_FINGERPRINTFILE }}"
   blockinfile:
+    marker: "# {mark} FINGERPRINT ANSIBLE MANAGED BLOCK"
     dest: "{{ leutils_config_FINGERPRINTFILE }}"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
@@ -15,9 +16,7 @@
     create: yes
     backup: yes
     block: |
-      
       {{ leutils_fingerprint_values.stdout }}
-      
   when:
     - leutils_fingerprint
     - not ansible_check_mode
