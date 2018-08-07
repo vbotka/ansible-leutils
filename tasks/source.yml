@@ -21,12 +21,18 @@
     url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
 
+- name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
+  stat:
+    path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
+  register: leutils_source_file_downloaded
+
 - name: "source: Extract sources to {{ leutils_source_dest }}"
   unarchive:
     src: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}"
     extra_opts: "{{ leutils_unarchive_extra_opts }}"
     remote_src: yes
+  when: leutils_source_file_downloaded.stat.exists
 
 - debug:
     msg: "leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ] leutils_ignore_lock [ {{ leutils_ignore_lock }} ]"

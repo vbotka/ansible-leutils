@@ -23,6 +23,7 @@
          leutils_config_file [ {{ leutils_config_file }} ]
          leutils_config_WEBSERVER [ {{ leutils_config_WEBSERVER }} ]
          leutils_config_LEROOT [ {{ leutils_config_LEROOT }} ]
+         leutils_config_LEROOTMTIMEPRESERVE [ {{ leutils_config_LEROOTMTIMEPRESERVE }} ]
          leutils_config_FINGERPRINTFILE [ {{ leutils_config_FINGERPRINTFILE }} ]
          leutils_fingerprint [ {{ leutils_fingerprint }} ]
          leutils_fingerprint_command [ {{ leutils_fingerprint_command }} ]
