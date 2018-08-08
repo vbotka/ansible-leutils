@@ -6,8 +6,8 @@ leutils
 [Ansible role.](https://galaxy.ansible.com/vbotka/leutils/) Install le-utils from https://github.com/vbotka/le-utils and configure cron to:
 
 - email a list of certificates that will expire in specified number of days.
-- optionaly dry-run renewal of the certificates.
-- optionaly renew if there are certificates due for renewal.
+- dry-run renewal of the certificates.
+- renew certificates.
 
 
 Requirements.
@@ -19,7 +19,7 @@ None.
 Role Variables.
 --------------
 
-TBD Check defaults and examples in vars.
+TBD Review defaults and examples in vars.
 
 
 Dependencies.
@@ -35,8 +35,8 @@ Daily dry-run renewal is recommended. "This verifies whether you're
 apparently able to get a certificate, in your current configuration
 ... You can use this to simulate what would apparently happen if you
 ran the command without --dry-run."
-[Q. What's the new --dry-run flag?]
-(https://community.letsencrypt.org/t/help-us-test-renewal-with-letsencrypt-renew/10562)
+
+[Q. What's the new --dry-run flag?](https://community.letsencrypt.org/t/help-us-test-renewal-with-letsencrypt-renew/10562)
 
 To enable dry-run renewal set
 
