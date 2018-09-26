@@ -45,7 +45,7 @@ leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerpr
 # create file with fingerprints of the certificates
 leutils_fingerprint: True
 leutils_fingerprint_file: "FINGERPRINT"
-leutils_fingerprint_command: "{{ leutils_bin_dir }}/leinfo -f -a"
+leutils_fingerprint_command: "{{ leutils_bin_dir }}/leinfo -g -a"
 
 # configure cron
 leutils_cron_user: "root"

@@ -1,25 +1,9 @@
 ---
 
-- name: "fingerprint: Get fingerprints"
+- name: "fingerprint: Create {{ leutils_config_FINGERPRINTFILE }}"
   command: "{{ leutils_fingerprint_command }}"
-  register: leutils_fingerprint_values
   changed_when: False
   when: leutils_fingerprint
-
-- name: "fingerprint: Create {{ leutils_config_FINGERPRINTFILE }}"
-  blockinfile:
-    marker: "# {mark} FINGERPRINT ANSIBLE MANAGED BLOCK"
-    dest: "{{ leutils_config_FINGERPRINTFILE }}"
-    owner: "{{ leutils_owner }}"
-    group: "{{ leutils_group }}"
-    mode: "{{ leutils_fingerprint_mode }}"
-    create: yes
-    backup: yes
-    block: |
-      {{ leutils_fingerprint_values.stdout }}
-  when:
-    - leutils_fingerprint
-    - not ansible_check_mode
   
 # EOF
 ...
