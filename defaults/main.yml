@@ -16,6 +16,7 @@ leutils_packages:
 # source
 leutils_source_version: "0.3.6"
 leutils_source_file: "{{ leutils_source_version }}.tar.gz"
+leutils_source_checksum: "sha1:6600a057f2fe3dd528745a062164bb3bf1197954"
 leutils_source_dir: "le-utils-{{ leutils_source_version }}"
 leutils_source_dest: "/usr/local/src"
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"

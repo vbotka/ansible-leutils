@@ -20,6 +20,7 @@
   get_url:
     url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
+    checksum: "{{ leutils_source_checksum }}"
 
 - name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
   stat:
