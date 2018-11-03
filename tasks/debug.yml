@@ -1,6 +1,6 @@
 ---
 
-- name: "leutils debug"
+- name: Debug leutils.
   vars:
     msg: |
          ansible_architecture [ {{ ansible_architecture }} ]
