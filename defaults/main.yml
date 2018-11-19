@@ -2,7 +2,7 @@
 # defaults vbotka.leutils
 
 freebsd_install_method: "packages"
-#freebsd_install_method: "ports"
+# freebsd_install_method: "ports"
 freebsd_use_packages: "yes"
 
 leutils_debug: False
@@ -41,7 +41,8 @@ leutils_config_file_mode: "0644"
 leutils_config_WEBSERVER: "APACHE"
 leutils_config_LEROOT: "/usr/local/etc/letsencrypt"
 leutils_config_LEROOTMTIMEPRESERVE: "1"
-leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
+leutils_config_FINGERPRINTFILE: >
+  "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
 
 # create file with fingerprints of the certificates
 leutils_fingerprint: True
@@ -55,7 +56,8 @@ leutils_cron_mailto: "root"
 # cron list of certificates scheduled daily
 leutils_days: "30"
 leutils_days_enable: True
-leutils_list_command: "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
+leutils_list_command: >
+  "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 
@@ -70,7 +72,7 @@ leutils_dryrun_cron_minute: "20"
 
 # cron renewal of certificates when expiry in less then 30 days scheduled daily
 leutils_renew: False
-#leutils_renew_command: "{{ leutils_bin_dir }}/renew-certificates.sh"
+# leutils_renew_command: "{{ leutils_bin_dir }}/renew-certificates.sh"
 leutils_renew_command: "{{ leutils_bin_dir }}/lectl -s -D=30 -c -a"
 leutils_renew_cron_hour: "3"
 leutils_renew_cron_minute: "20"

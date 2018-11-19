@@ -4,6 +4,6 @@
   command: "{{ leutils_fingerprint_command }}"
   changed_when: False
   when: leutils_fingerprint
-  
+
 # EOF
 ...

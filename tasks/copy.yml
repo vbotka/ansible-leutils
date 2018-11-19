@@ -6,7 +6,9 @@
   register: leutils_lock
 
 - debug:
-    msg: "copy: [LOCK] le-utils-current.lock file is present. Scripts will no be copied."
+    msg: >
+      "copy: [LOCK] le-utils-current.lock file is present.
+      Scripts will no be copied."
   when:
     - leutils_lock.stat.exists
     - not leutils_ignore_lock

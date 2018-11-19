@@ -1,6 +1,7 @@
 ---
 
-- name: "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
+- name: >
+    "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-current.lock"
   register: leutils_lock
@@ -22,7 +23,9 @@
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     checksum: "{{ leutils_source_checksum }}"
 
-- name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
+- name: >
+    "source: Check existence of
+    {{ leutils_source_url }}/{{ leutils_source_file }}"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
   register: leutils_source_file_downloaded
@@ -36,7 +39,9 @@
   when: leutils_source_file_downloaded.stat.exists
 
 - debug:
-    msg: "leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ] leutils_ignore_lock [ {{ leutils_ignore_lock }} ]"
+    msg: >
+      leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ]
+      leutils_ignore_lock [ {{ leutils_ignore_lock }} ]
   when: leutils_debug
 
 - name: "source: Create symbolic link le-utils to {{ leutils_source_dir }}"

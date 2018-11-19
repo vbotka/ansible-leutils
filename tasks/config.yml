@@ -11,10 +11,14 @@
     backup: yes
     create: yes
   loop:
-    - { regexp: "^WEBSERVER=", line: "WEBSERVER=\"{{ leutils_config_WEBSERVER }}\""}
-    - { regexp: "^LEROOT=", line: "LEROOT=\"{{ leutils_config_LEROOT }}\""}
-    - { regexp: "^LEROOTMTIMEPRESERVE=", line: "LEROOTMTIMEPRESERVE=\"{{ leutils_config_LEROOTMTIMEPRESERVE }}\""}
-    - { regexp: "^FINGERPRINTFILE=", line: "FINGERPRINTFILE=\"{{ leutils_config_FINGERPRINTFILE }}\""}
+    - regexp: "^WEBSERVER="
+      line: "WEBSERVER=\"{{ leutils_config_WEBSERVER }}\""
+    - regexp: "^LEROOT="
+      line: "LEROOT=\"{{ leutils_config_LEROOT }}\""
+    - regexp: "^LEROOTMTIMEPRESERVE="
+      line: "LEROOTMTIMEPRESERVE=\"{{ leutils_config_LEROOTMTIMEPRESERVE }}\""
+    - regexp: "^FINGERPRINTFILE="
+      line: "FINGERPRINTFILE=\"{{ leutils_config_FINGERPRINTFILE }}\""
 
 - name: "config: Create directory {{ leutils_config_LEROOT }}"
   file:

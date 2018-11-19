@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 #set -x
 
-LEINFO="{{leutils_bin_dir}}/leinfo"
+LEINFO="{{ leutils_bin_dir }}/leinfo"
 APACHECTL="/usr/local/sbin/apachectl"
 CERTBOT="/usr/local/bin/certbot"
 RESTART="0"
@@ -30,7 +30,7 @@ apache-status
 apache-stop
 for i in `$LEINFO -l`; do
     d=`$LEINFO -e -s $i`
-    if [ "$d" -lt "{{leutils_days}}" ]; then
+    if [ "$d" -lt "{{ leutils_days }}" ]; then
 	printf "[OK]   Renew certificate $i\n"
         if ($CERTBOT certonly --standalone -d $i); then
 	    printf "[OK]   Done.\n"

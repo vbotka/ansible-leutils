@@ -41,6 +41,6 @@
     job: "{{ leutils_renew_command }}"
     user: "{{ leutils_cron_user }}"
   when: leutils_renew
-  
+
 # EOF
 ...
