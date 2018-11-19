@@ -41,8 +41,7 @@ leutils_config_file_mode: "0644"
 leutils_config_WEBSERVER: "APACHE"
 leutils_config_LEROOT: "/usr/local/etc/letsencrypt"
 leutils_config_LEROOTMTIMEPRESERVE: "1"
-leutils_config_FINGERPRINTFILE: >
-  "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
+leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
 
 # create file with fingerprints of the certificates
 leutils_fingerprint: True
