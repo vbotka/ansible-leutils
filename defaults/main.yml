@@ -56,7 +56,7 @@ leutils_cron_mailto: "root"
 leutils_days: "30"
 leutils_days_enable: True
 leutils_list_command: >
-  "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
+  {{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 
