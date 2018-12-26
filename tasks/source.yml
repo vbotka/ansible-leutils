@@ -1,12 +1,13 @@
 ---
 
-- name: >
-    "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
+- name: "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-current.lock"
   register: leutils_lock
 
-- debug: msg="DEBUG le-utils-current.lock file is present."
+- name: "source: Debug le-utils-current.lock"
+  debug:
+    msg: "DEBUG le-utils-current.lock file is present."
   when:
     - leutils_lock.stat.exists
     - not leutils_ignore_lock
@@ -23,9 +24,7 @@
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     checksum: "{{ leutils_source_checksum }}"
 
-- name: >
-    "source: Check existence of
-    {{ leutils_source_url }}/{{ leutils_source_file }}"
+- name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
   register: leutils_source_file_downloaded
@@ -36,12 +35,14 @@
     dest: "{{ leutils_source_dest }}"
     extra_opts: "{{ leutils_unarchive_extra_opts }}"
     remote_src: yes
+    keep_newer: yes
   when: leutils_source_file_downloaded.stat.exists
 
-- debug:
-    msg: >
-      leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ]
-      leutils_ignore_lock [ {{ leutils_ignore_lock }} ]
+- name: "source: Debug leutils_lock"
+  debug:
+    msg: |
+         leutils_lock.stat.exists [ {{ leutils_lock.stat.exists }} ]
+         leutils_ignore_lock [ {{ leutils_ignore_lock }} ]
   when: leutils_debug
 
 - name: "source: Create symbolic link le-utils to {{ leutils_source_dir }}"
@@ -58,7 +59,10 @@
   register: leutils_which_bash
   changed_when: False
 
-#- debug: msg="{{ leutils_which_bash.stdout }}"
+- name: "source: Debug leutils_which_bash"
+  debug:
+    msg: "{{ leutils_which_bash.stdout }}"
+  when: leutils_debug
 
 - name: "source: Patch {{ leutils_which_bash.stdout }}"
   lineinfile:

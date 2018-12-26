@@ -1,12 +1,17 @@
 ---
 # defaults vbotka.leutils
 
+leutils_debug: False
+leutils_ignore_lock: False
+
 freebsd_install_method: "packages"
 # freebsd_install_method: "ports"
 freebsd_use_packages: "yes"
-
-leutils_debug: False
-leutils_ignore_lock: False
+freebsd_install_retries: 10
+freebsd_install_delay: 5
+# Linux
+linux_install_retries: 10
+linux_install_delay: 5
 
 leutils_packages:
   - shells/bash
@@ -55,8 +60,7 @@ leutils_cron_mailto: "root"
 # cron list of certificates scheduled daily
 leutils_days: "30"
 leutils_days_enable: True
-leutils_list_command: >
-  {{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a
+leutils_list_command: "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 

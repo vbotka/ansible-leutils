@@ -2,9 +2,7 @@
 
 - import_tasks: debug.yml
   when: leutils_debug
-  tags:
-    - always
-    - leutils_debug
+  tags: [leutils_debug, always]
 
 - import_tasks: packages.yml
   tags: leutils_packages
