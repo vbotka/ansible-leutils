@@ -62,7 +62,9 @@
 - name: "source: Debug leutils_which_bash"
   debug:
     msg: "{{ leutils_which_bash.stdout }}"
-  when: leutils_debug
+  when:
+    - not ansible_check_mode
+    - leutils_debug
 
 - name: "source: Patch {{ leutils_which_bash.stdout }}"
   lineinfile:
