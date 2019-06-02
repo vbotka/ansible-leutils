@@ -19,13 +19,13 @@ leutils_packages:
   - security/py-certbot
 
 # source
-leutils_source_version: "0.3.6"
+leutils_source_version: "0.3.7"
 leutils_source_file: "{{ leutils_source_version }}.tar.gz"
-leutils_source_checksum: "sha1:6600a057f2fe3dd528745a062164bb3bf1197954"
+leutils_source_checksum: "sha256:5435e436483f5f41fa02cbd9027e92d9701da199a9c6b632af9eb1b02fe410fc"
 leutils_source_dir: "le-utils-{{ leutils_source_version }}"
 leutils_source_dest: "/usr/local/src"
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"
-leutils_unarchive_extra_opts: "--skip-old-files"
+leutils_unarchive_extra_opts: ""  # "--skip-old-files" causes no untar
 
 # directories, owner, group and permissions
 leutils_owner: "root"

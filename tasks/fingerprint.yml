@@ -5,5 +5,7 @@
   changed_when: False
   when: leutils_fingerprint
 
+# TODO: Make idempotent. With checksum?
+
 # EOF
 ...

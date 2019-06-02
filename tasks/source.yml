@@ -17,17 +17,20 @@
   file:
     state: directory
     path: "{{ leutils_source_dest }}"
+  tags: leutils_download
 
 - name: "source: Download {{ leutils_source_url }}/{{ leutils_source_file }}"
   get_url:
     url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     checksum: "{{ leutils_source_checksum }}"
+  tags: leutils_download
 
 - name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
   stat:
     path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
   register: leutils_source_file_downloaded
+  tags: leutils_extract
 
 - name: "source: Extract sources to {{ leutils_source_dest }}"
   unarchive:
@@ -37,6 +40,7 @@
     remote_src: yes
     keep_newer: yes
   when: leutils_source_file_downloaded.stat.exists
+  tags: leutils_extract
 
 - name: "source: Debug leutils_lock"
   debug:
