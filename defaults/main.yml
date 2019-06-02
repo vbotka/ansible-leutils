@@ -19,9 +19,9 @@ leutils_packages:
   - security/py-certbot
 
 # source
-leutils_source_version: "0.3.7"
+leutils_source_version: "0.3.8"
 leutils_source_file: "{{ leutils_source_version }}.tar.gz"
-leutils_source_checksum: "sha256:5435e436483f5f41fa02cbd9027e92d9701da199a9c6b632af9eb1b02fe410fc"
+leutils_source_checksum: "sha256:43e00b0060fa1a3f04c2b73c8fb96d65bb71381705d24cd3dcc0b44e781e303e"
 leutils_source_dir: "le-utils-{{ leutils_source_version }}"
 leutils_source_dest: "/usr/local/src"
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"
