@@ -32,13 +32,14 @@
   register: leutils_source_file_downloaded
   tags: leutils_extract
 
-- name: "source: Extract sources to {{ leutils_source_dest }}"
+- name: "source: Extract sources to {{ leutils_source_dest }}/{{ leutils_source_dir }}"
   unarchive:
     src: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}"
     extra_opts: "{{ leutils_unarchive_extra_opts }}"
     remote_src: yes
     keep_newer: yes
+    creates: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
   when: leutils_source_file_downloaded.stat.exists
   tags: leutils_extract
 
