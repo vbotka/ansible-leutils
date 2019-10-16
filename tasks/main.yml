@@ -1,7 +1,7 @@
 ---
 
 - import_tasks: debug.yml
-  when: leutils_debug
+  when: leutils_debug|bool
   tags: [leutils_debug, always]
 
 - import_tasks: packages.yml

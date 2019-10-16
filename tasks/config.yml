@@ -8,8 +8,8 @@
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
     mode: "{{ leutils_config_mode }}"
-    backup: yes
-    create: yes
+    backup: "{{ leutils_backup_conf }}"
+    create: true
   loop:
     - regexp: "^WEBSERVER="
       line: "WEBSERVER=\"{{ leutils_config_WEBSERVER }}\""

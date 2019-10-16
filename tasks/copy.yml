@@ -10,8 +10,8 @@
           Scripts will not be copied."
   when:
     - leutils_lock.stat.exists
-    - not leutils_ignore_lock
-    - leutils_debug
+    - not leutils_ignore_lock|bool
+    - leutils_debug|bool
 
 - name: "copy: Create directory for installation {{ leutils_bin_dir }}"
   file:
@@ -28,12 +28,12 @@
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
     mode: "{{ leutils_bin_mode }}"
-    remote_src: yes
+    remote_src: true
   loop:
     - lectl
     - leinfo
   when: (not ansible_check_mode) and
-       ((not leutils_lock.stat.exists) or leutils_ignore_lock)
+       ((not leutils_lock.stat.exists) or leutils_ignore_lock|bool)
 
 # EOF
 ...

@@ -1,8 +1,9 @@
 ---
 # defaults vbotka.leutils
 
-leutils_debug: False
-leutils_ignore_lock: False
+leutils_debug: false
+leutils_backup_conf: false
+leutils_ignore_lock: false
 
 freebsd_install_method: "packages"
 # freebsd_install_method: "ports"
@@ -26,8 +27,8 @@ leutils_source_dir: "le-utils-{{ leutils_source_version }}"
 leutils_source_dest: "/usr/local/src"
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"
 leutils_unarchive_extra_opts: []
-  # - "--keep-newer-files"
-  # - "--skip-old-files" causes no untar
+# - "--keep-newer-files"
+# - "--skip-old-files"    # causes no untar
 
 # directories, owner, group and permissions
 leutils_owner: "root"
@@ -51,7 +52,7 @@ leutils_config_LEROOTMTIMEPRESERVE: "1"
 leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
 
 # create file with fingerprints of the certificates
-leutils_fingerprint: True
+leutils_fingerprint: true
 leutils_fingerprint_file: "FINGERPRINT"
 leutils_fingerprint_command: "{{ leutils_bin_dir }}/leinfo -g -a"
 
@@ -61,13 +62,13 @@ leutils_cron_mailto: "root"
 
 # cron list of certificates scheduled daily
 leutils_days: "30"
-leutils_days_enable: True
+leutils_days_enable: true
 leutils_list_command: "{{ leutils_bin_dir }}/leinfo -e --Days={{ leutils_days }} -a"
 leutils_days_cron_hour: "2"
 leutils_days_cron_minute: "15"
 
 # cron dry-run renewal of certificates scheduled daily
-leutils_dryrun: False
+leutils_dryrun: false
 leutils_dryrun_command: "{{ leutils_bin_dir }}/lectl -s -n -c -a"
 leutils_dryrun_cron_hour: "2"
 leutils_dryrun_cron_minute: "20"
@@ -76,7 +77,7 @@ leutils_dryrun_cron_minute: "20"
 # Command "/root/bin/lectl -n -c -a" will stop apache during renewal
 
 # cron renewal of certificates when expiry in less then 30 days scheduled daily
-leutils_renew: False
+leutils_renew: false
 # leutils_renew_command: "{{ leutils_bin_dir }}/renew-certificates.sh"
 leutils_renew_command: "{{ leutils_bin_dir }}/lectl -s -D=30 -c -a"
 leutils_renew_cron_hour: "3"

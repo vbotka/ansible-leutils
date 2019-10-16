@@ -13,7 +13,7 @@
     hour: "{{ leutils_days_cron_hour }}"
     job: "{{ leutils_list_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_days_enable
+  when: leutils_days_enable|bool
 
 - name: "cron: Configure cron dry-run renewal of certificates"
   cron:
@@ -22,7 +22,7 @@
     hour: "{{ leutils_dryrun_cron_hour }}"
     job: "{{ leutils_dryrun_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_dryrun
+  when: leutils_dryrun|bool
 
 - name: "cron: Create script to renew certificates"
   template:
@@ -31,7 +31,7 @@
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
     mode: "{{ leutils_bin_mode }}"
-    backup: yes
+    backup: "{{ leutils_backup_conf }}"
 
 - name: "cron: Configure cron renewal of certificates"
   cron:
@@ -40,7 +40,7 @@
     hour: "{{ leutils_renew_cron_hour }}"
     job: "{{ leutils_renew_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_renew
+  when: leutils_renew|bool
 
 # EOF
 ...
