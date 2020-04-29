@@ -11,13 +11,12 @@
 
 ## Requirements
 
-
 None.
 
 
 ## Role Variables
 
-TBD Review defaults and examples in vars.
+Review defaults and examples in vars.
 
 
 ## Dependencies
@@ -30,19 +29,19 @@ None.
 1) Create directory for the source code and download the tarball first. Without the tarball the --check will crash with error `No such file or directory`.
 
 ```
-ansible-playbook leutils.yml -t leutils_download
+shell> ansible-playbook leutils.yml -t leutils_download
 ```
 
 2) Perform a syntax check on the playbook, but do not execute it.
 
 ```
-ansible-playbook leutils.yml --check
+shell> ansible-playbook leutils.yml --check
 ```
 
 3) Run the playbook.
 
 ```
-ansible-playbook leutils.yml
+shell> ansible-playbook leutils.yml
 ```
 
 
@@ -64,7 +63,7 @@ leutils_dryrun: True
 and configure variable *leutils_dryrun_command*. Command:
 
 ```
-/root/bin/lectl -n -c -a
+shell> /root/bin/lectl -n -c -a
 ```
 
 will stop the webserver during dry-run renewal.
