@@ -8,6 +8,8 @@
 - dry-run renewal of the certificates.
 - renew certificates.
 
+Please feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-leutils/issues). Contributions are welcome.
+
 
 ## Requirements
 
