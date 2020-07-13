@@ -1,13 +1,14 @@
 ---
 # defaults vbotka.leutils
 
+leutils_install: true
 leutils_debug: false
 leutils_backup_conf: false
 leutils_ignore_lock: false
 
-freebsd_install_method: "packages"
-# freebsd_install_method: "ports"
-freebsd_use_packages: "yes"
+freebsd_install_method: packages
+# freebsd_install_method: ports
+freebsd_use_packages: true
 freebsd_install_retries: 10
 freebsd_install_delay: 5
 # Linux
@@ -24,16 +25,16 @@ leutils_source_version: "0.3.8"
 leutils_source_file: "{{ leutils_source_version }}.tar.gz"
 leutils_source_checksum: "sha256:43e00b0060fa1a3f04c2b73c8fb96d65bb71381705d24cd3dcc0b44e781e303e"
 leutils_source_dir: "le-utils-{{ leutils_source_version }}"
-leutils_source_dest: "/usr/local/src"
+leutils_source_dest: /usr/local/src
 leutils_source_url: "https://github.com/vbotka/le-utils/archive"
 leutils_unarchive_extra_opts: []
 # - "--keep-newer-files"
 # - "--skip-old-files"    # causes no untar
 
 # directories, owner, group and permissions
-leutils_owner: "root"
-leutils_group: "wheel"
-leutils_bin_dir: "/root/bin"
+leutils_owner: root
+leutils_group: wheel
+leutils_bin_dir: /root/bin
 leutils_bin_dir_mode: "0755"
 leutils_bin_mode: "0755"
 leutils_config_mode: "0644"
@@ -42,23 +43,23 @@ leutils_LEROOT_live_mode: "0700"
 leutils_fingerprint_mode: "0644"
 
 # configure lectl
-leutils_config_file: "/etc/le-utils"
-leutils_config_file_owner: "root"
-leutils_config_file_group: "wheel"
+leutils_config_file: /etc/le-utils
+leutils_config_file_owner: root
+leutils_config_file_group: wheel
 leutils_config_file_mode: "0644"
-leutils_config_WEBSERVER: "APACHE"
-leutils_config_LEROOT: "/usr/local/etc/letsencrypt"
+leutils_config_WEBSERVER: APACHE
+leutils_config_LEROOT: /usr/local/etc/letsencrypt
 leutils_config_LEROOTMTIMEPRESERVE: "1"
 leutils_config_FINGERPRINTFILE: "{{ leutils_config_LEROOT }}/{{ leutils_fingerprint_file }}"
 
 # create file with fingerprints of the certificates
 leutils_fingerprint: true
-leutils_fingerprint_file: "FINGERPRINT"
+leutils_fingerprint_file: FINGERPRINT
 leutils_fingerprint_command: "{{ leutils_bin_dir }}/leinfo -g -a"
 
 # configure cron
-leutils_cron_user: "root"
-leutils_cron_mailto: "root"
+leutils_cron_user: root
+leutils_cron_mailto: root
 
 # cron list of certificates scheduled daily
 leutils_days: "30"

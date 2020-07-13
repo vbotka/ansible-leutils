@@ -5,6 +5,7 @@
   tags: [leutils_debug, always]
 
 - import_tasks: packages.yml
+  when: leutils_install|bool
   tags: leutils_packages
 
 - import_tasks: source.yml

@@ -1,6 +1,6 @@
 ---
 
-- name: "Debug"
+- name: Debug
   vars:
     msg: |
          ansible_architecture [{{ ansible_architecture }}]
@@ -30,10 +30,11 @@
          leutils_config_FINGERPRINTFILE [{{ leutils_config_FINGERPRINTFILE }}]
          leutils_fingerprint [{{ leutils_fingerprint }}]
          leutils_fingerprint_command [{{ leutils_fingerprint_command }}]
+         leutils_install [{{ leutils_install }}]
          leutils_packages
          {{ leutils_packages|to_nice_yaml }}
   debug:
-    msg: "{{ msg.split('\n') }}"
+    msg: "{{ msg.split('\n')[:-1] }}"
 
 # EOF
 ...
