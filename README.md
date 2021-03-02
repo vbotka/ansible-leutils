@@ -1,14 +1,16 @@
 # leutils
 
-[![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
+[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/leutils)[![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
 
-[Ansible role.](https://galaxy.ansible.com/vbotka/leutils/) Install le-utils from https://github.com/vbotka/le-utils and configure cron to:
+[Ansible role.](https://galaxy.ansible.com/vbotka/leutils/) Install [le-utils](https://github.com/vbotka/le-utils) and configure cron.
 
-- email a list of certificates that will expire in specified number of days.
-- dry-run renewal of the certificates.
-- renew certificates.
+- Email a list of certificates that will expire in specified number of days.
+- Dry-run renewal of the certificates.
+- Renew certificates.
 
-Please feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-leutils/issues). Contributions are welcome.
+Feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-leutils/issues).
+
+[Contributions are welcome](https://github.com/firstcontributions/first-contributions).
 
 
 ## Requirements
