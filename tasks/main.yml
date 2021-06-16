@@ -1,26 +1,33 @@
 ---
 
-- import_tasks: debug.yml
+- name: Import debug.yml
+  ansible.builtin.import_tasks: debug.yml
   when: leutils_debug|bool
   tags: [leutils_debug, always]
 
-- import_tasks: packages.yml
+- name: Import packages.yml
+  ansible.builtin.import_tasks: packages.yml
   when: leutils_install|bool
   tags: leutils_packages
 
-- import_tasks: source.yml
+- name: Import source.yml
+  ansible.builtin.import_tasks: source.yml
   tags: leutils_source
 
-- import_tasks: config.yml
+- name: Import config.yml
+  ansible.builtin.import_tasks: config.yml
   tags: leutils_config
 
-- import_tasks: copy.yml
+- name: Import copy.yml
+  ansible.builtin.import_tasks: copy.yml
   tags: leutils_copy
 
-- import_tasks: fingerprint.yml
+- name: Import fingerprint.yml
+  ansible.builtin.import_tasks: fingerprint.yml
   tags: leutils_fingerprint
 
-- import_tasks: cron.yml
+- name: Import cron.yml
+  ansible.builtin.import_tasks: cron.yml
   tags: leutils_cron
 
 # EOF

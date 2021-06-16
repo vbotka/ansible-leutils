@@ -13,33 +13,32 @@ Feel free to [share your feedback and report issues](https://github.com/vbotka/a
 [Contributions are welcome](https://github.com/firstcontributions/first-contributions).
 
 
-## Requirements
+## Requirements and dependencies
 
-None.
+### Collections
+
+* community.general
 
 
 ## Role Variables
 
-Review defaults and examples in vars.
-
-
-## Dependencies
-
-None.
+See defaults and examples in vars.
 
 
 ## Installation
 
-1) Create directory for the source code and download the tarball first. Without the tarball the --check will crash with error `No such file or directory`.
+1) Create directory for the source code and download the tarball first. Without the tarball the
+--check will crash with error `No such file or directory`
 
 ```
 shell> ansible-playbook leutils.yml -t leutils_download
 ```
 
-2) Perform a syntax check on the playbook, but do not execute it.
+2) Perform a syntax check then dry-run the playbook and show the changes
 
 ```
-shell> ansible-playbook leutils.yml --check
+shell> ansible-playbook leutils.yml --syntax-check
+shell> ansible-playbook leutils.yml --check --diff
 ```
 
 3) Run the playbook.

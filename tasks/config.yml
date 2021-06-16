@@ -1,7 +1,7 @@
 ---
 
 - name: "config: Create configuration in {{ leutils_config_file }}"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ leutils_config_file }}"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -10,31 +10,23 @@
     mode: "{{ leutils_config_mode }}"
     backup: "{{ leutils_backup_conf }}"
     create: true
-  loop:
-    - regexp: '^WEBSERVER='
-      line: 'WEBSERVER="{{ leutils_config_WEBSERVER }}"'
-    - regexp: '^LEROOT='
-      line: 'LEROOT="{{ leutils_config_LEROOT }}"'
-    - regexp: '^LEROOTMTIMEPRESERVE='
-      line: 'LEROOTMTIMEPRESERVE="{{ leutils_config_LEROOTMTIMEPRESERVE }}"'
-    - regexp: '^FINGERPRINTFILE='
-      line: 'FINGERPRINTFILE="{{ leutils_config_FINGERPRINTFILE }}"'
+  loop: "{{ leutils_config_items }}"
 
-- name: "config: Create directory {{ leutils_config_LEROOT }}"
-  file:
+- name: "config: Create directory {{ leutils_config_leroot }}"
+  ansible.builtin.file:
     state: directory
-    path: "{{ leutils_config_LEROOT }}"
+    path: "{{ leutils_config_leroot }}"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
-    mode: "{{ leutils_LEROOT_mode }}"
+    mode: "{{ leutils_leroot_mode }}"
 
-- name: "config: Create directory {{ leutils_config_LEROOT }}/live"
-  file:
+- name: "config: Create directory {{ leutils_config_leroot }}/live"
+  ansible.builtin.file:
     state: directory
-    path: "{{ leutils_config_LEROOT }}/live"
+    path: "{{ leutils_config_leroot }}/live"
     owner: "{{ leutils_owner }}"
     group: "{{ leutils_group }}"
-    mode: "{{ leutils_LEROOT_live_mode }}"
+    mode: "{{ leutils_leroot_live_mode }}"
 
 # EOF
 ...
