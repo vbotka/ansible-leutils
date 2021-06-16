@@ -1,13 +1,13 @@
 ---
 
 - name: "cron: Configure cron MAILTO={{ leutils_cron_mailto }}"
-  cronvar:
+  community.general.cronvar:
     name: MAILTO
     value: "{{ leutils_cron_mailto }}"
     user: "{{ leutils_cron_user }}"
 
 - name: "cron: Configure cron check expiry of certificates"
-  cron:
+  ansible.builtin.cron:
     name: check expiry of certificates
     minute: "{{ leutils_days_cron_minute }}"
     hour: "{{ leutils_days_cron_hour }}"
@@ -16,7 +16,7 @@
   when: leutils_days_enable|bool
 
 - name: "cron: Configure cron dry-run renewal of certificates"
-  cron:
+  ansible.builtin.cron:
     name: dry-run renewal of certificates
     minute: "{{ leutils_dryrun_cron_minute }}"
     hour: "{{ leutils_dryrun_cron_hour }}"
@@ -25,7 +25,7 @@
   when: leutils_dryrun|bool
 
 - name: "cron: Create script to renew certificates"
-  template:
+  ansible.builtin.template:
     src: renew-certificates.j2
     dest: "{{ leutils_bin_dir }}/renew-certificates.sh"
     owner: "{{ leutils_owner }}"
@@ -34,7 +34,7 @@
     backup: "{{ leutils_backup_conf }}"
 
 - name: "cron: Configure cron renewal of certificates"
-  cron:
+  ansible.builtin.cron:
     name: renewal of certificates
     minute: "{{ leutils_renew_cron_minute }}"
     hour: "{{ leutils_renew_cron_hour }}"

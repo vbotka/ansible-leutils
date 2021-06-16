@@ -1,12 +1,12 @@
 ---
 
 - name: "source: Test presence of {{ leutils_source_dest }}/le-utils-current.lock"
-  stat:
+  ansible.builtin.stat:
     path: "{{ leutils_source_dest }}/le-utils-current.lock"
   register: leutils_lock
 
 - name: "source: Debug le-utils-current.lock"
-  debug:
+  ansible.builtin.debug:
     msg: "DEBUG le-utils-current.lock file is present."
   when:
     - leutils_lock.stat.exists
@@ -14,26 +14,27 @@
     - leutils_debug|bool
 
 - name: "source: Create directory for the source code {{ leutils_source_dest }}"
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ leutils_source_dest }}"
+    mode: "{{ leutils_source_dest_mode }}"
   tags: leutils_download
 
 - name: "source: Download {{ leutils_source_url }}/{{ leutils_source_file }}"
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     checksum: "{{ leutils_source_checksum }}"
   tags: leutils_download
 
 - name: "source: Check existence of {{ leutils_source_url }}/{{ leutils_source_file }}"
-  stat:
+  ansible.builtin.stat:
     path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
   register: leutils_source_file_downloaded
   tags: leutils_extract
 
 - name: "source: Extract sources to {{ leutils_source_dest }}/{{ leutils_source_dir }}"
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
     dest: "{{ leutils_source_dest }}"
     extra_opts: "{{ leutils_unarchive_extra_opts }}"
@@ -44,14 +45,14 @@
   tags: leutils_extract
 
 - name: "source: Debug leutils_lock"
-  debug:
+  ansible.builtin.debug:
     msg: |
          leutils_lock.stat.exists [{{ leutils_lock.stat.exists }}]
          leutils_ignore_lock [{{ leutils_ignore_lock }}]
   when: leutils_debug|bool
 
 - name: "source: Create symbolic link le-utils to {{ leutils_source_dir }}"
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
     dest: "{{ leutils_source_dest }}/le-utils"
@@ -60,19 +61,19 @@
          leutils_ignore_lock|bool
 
 - name: "source: Which bash"
-  command: "which bash"
+  ansible.builtin.command: "which bash"
   register: leutils_which_bash
   changed_when: false
 
 - name: "source: Debug leutils_which_bash"
-  debug:
+  ansible.builtin.debug:
     msg: "{{ leutils_which_bash.stdout }}"
   when:
     - not ansible_check_mode
     - leutils_debug|bool
 
 - name: "source: Patch {{ leutils_which_bash.stdout }}"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ leutils_source_dest }}/le-utils/{{ item }}"
     regexp: "#!"
     line: "#!{{ leutils_which_bash.stdout }}"

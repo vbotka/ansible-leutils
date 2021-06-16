@@ -2,7 +2,7 @@
 
 - name: Debug
   vars:
-    msg: |
+    msg: |-
          ansible_architecture [{{ ansible_architecture }}]
          ansible_os_family [{{ ansible_os_family }}]
          ansible_distribution [{{ ansible_distribution }}]
@@ -23,18 +23,20 @@
          leutils_source_version [{{ leutils_source_version }}]
          leutils_unarchive_extra_opts [{{ leutils_unarchive_extra_opts }}]
          leutils_config_file [{{ leutils_config_file }}]
-         leutils_config_WEBSERVER [{{ leutils_config_WEBSERVER }}]
-         leutils_config_LEROOT [{{ leutils_config_LEROOT }}]
-         leutils_config_LEROOTMTIMEPRESERVE
-         [{{ leutils_config_LEROOTMTIMEPRESERVE }}]
-         leutils_config_FINGERPRINTFILE [{{ leutils_config_FINGERPRINTFILE }}]
+         leutils_config_webserver [{{ leutils_config_webserver }}]
+         leutils_config_leroot [{{ leutils_config_leroot }}]
+         leutils_config_lerootmtimepreserve
+         [{{ leutils_config_lerootmtimepreserve }}]
+         leutils_config_fingerprintfile [{{ leutils_config_fingerprintfile }}]
+         leutils_config_items
+         {{ leutils_config_items|to_yaml }}
          leutils_fingerprint [{{ leutils_fingerprint }}]
          leutils_fingerprint_command [{{ leutils_fingerprint_command }}]
          leutils_install [{{ leutils_install }}]
          leutils_packages
          {{ leutils_packages|to_nice_yaml }}
   debug:
-    msg: "{{ msg.split('\n')[:-1] }}"
+    msg: "{{ msg.split('\n') }}"
 
 # EOF
 ...
