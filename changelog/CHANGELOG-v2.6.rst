@@ -14,11 +14,16 @@ Ansible 2.17 update
 
 Major Changes
 -------------
-- Supported FreeBSD: 12.4, 13.2, 14.0
-- Supported Ubuntu: focal, jammy, lunar, mantic
+* Supported FreeBSD: 13.3, 14.0, 14,1
 
 Minor Changes
 -------------
+* Add var leutils_role_version
+* Update debug format
+* Update lint config.
+* Update README.
+* Fix lint errors and warnings.
+* Fix lint templates/renew-certificates.j2
 
 Bugfixes
 --------

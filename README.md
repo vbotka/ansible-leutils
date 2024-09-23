@@ -1,12 +1,14 @@
 # leutils
 
-[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/leutils)[![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
+[![quality](https://img.shields.io/ansible/quality/27910)](https://galaxy.ansible.com/vbotka/leutils)
+[![Build Status](https://travis-ci.org/vbotka/ansible-leutils.svg?branch=master)](https://travis-ci.org/vbotka/ansible-leutils)
+[![GitHub tag](https://img.shields.io/github/v/tag/vbotka/ansible-leutils)](https://github.com/vbotka/ansible-leutils/tags)
 
 [Ansible role.](https://galaxy.ansible.com/vbotka/leutils/) Install [le-utils](https://github.com/vbotka/le-utils) and configure cron.
 
-- Email a list of certificates that will expire in specified number of days.
-- Dry-run renewal of the certificates.
-- Renew certificates.
+* Email a list of certificates that will expire in specified number of days.
+* Dry-run renewal of the certificates.
+* Renew certificates.
 
 Feel free to [share your feedback and report issues](https://github.com/vbotka/ansible-leutils/issues).
 
@@ -25,23 +27,57 @@ Feel free to [share your feedback and report issues](https://github.com/vbotka/a
 See defaults and examples in vars.
 
 
-## Installation
+## Workflow
 
-1) Create directory for the source code and download the tarball first. Without the tarball the
---check will crash with error `No such file or directory`
+Create the playbook and inventory. Check the syntax
 
-```
-shell> ansible-playbook leutils.yml -t leutils_download
-```
-
-2) Perform a syntax check then dry-run the playbook and show the changes
-
-```
+```bash
 shell> ansible-playbook leutils.yml --syntax-check
-shell> ansible-playbook leutils.yml --check --diff
 ```
 
-3) Run the playbook.
+Display variables
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_debug -e leutils_debug=true
+```
+
+Install packages
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_pkg -e leutils_install=true
+```
+
+Download, extract, and patch source
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_source -e leutils_debug=true
+```
+
+Configure le-utils
+
+```bash
+ansible-playbook leutils.yml -t leutils_config
+```
+
+Copy scripts
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_copy
+```
+
+Create fingerprint
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_fingerprint -e leutils_fingerprint=true
+```
+
+Configure cron
+
+```bash
+shell> ansible-playbook leutils.yml -t leutils_cron
+```
+
+Run the tasks in a single play
 
 ```
 shell> ansible-playbook leutils.yml
@@ -83,6 +119,17 @@ leutils_renew: True
 and configure variable *leutils_renew_command*. Review the template
 renew-certificates.j2 and optionally use the script
 renew-certificates.sh
+
+
+## Ansible lint
+
+Use the configuration file *.ansible-lint.local* when running
+*ansible-lint*. Some rules might be disabled and some warnings might
+be ignored. See the notes in the configuration file.
+
+```bash
+shell> ansible-lint -c .ansible-lint.local
+```
 
 
 ## License

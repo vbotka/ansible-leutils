@@ -8,7 +8,7 @@ RESTART="0"
 
 function apache-status {
     if [ -e "$APACHECTL" ]; then
-	if ( $APACHECTL status | grep "is running"); then
+	if ($APACHECTL status | grep "is running"); then
 	    RESTART=1
 	fi
     fi
@@ -28,11 +28,11 @@ function apache-restart {
 
 apache-status
 apache-stop
-for i in `$LEINFO -l`; do
-    d=`$LEINFO -e -s $i`
+for i in $($LEINFO -l); do
+    d=$(LEINFO -e -s "$i")
     if [ "$d" -lt "{{ leutils_days }}" ]; then
-	printf "[OK]   Renew certificate $i\n"
-        if ($CERTBOT certonly --standalone -d $i); then
+	printf '[OK]   Renew certificate %s\n' "$i"
+        if ($CERTBOT certonly --standalone -d "$i"); then
 	    printf "[OK]   Done.\n"
 	else
 	    printf "[ERR]  \n"

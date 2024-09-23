@@ -2,13 +2,13 @@
 
 - name: Import debug.yml
   ansible.builtin.import_tasks: debug.yml
-  when: leutils_debug|bool
-  tags: [leutils_debug, always]
+  when: leutils_debug | bool
+  tags: leutils_debug
 
-- name: Import packages.yml
-  ansible.builtin.import_tasks: packages.yml
-  when: leutils_install|bool
-  tags: leutils_packages
+- name: Import pkg.yml
+  ansible.builtin.import_tasks: pkg.yml
+  when: leutils_install | bool
+  tags: leutils_pkg
 
 - name: Import source.yml
   ansible.builtin.import_tasks: source.yml
@@ -31,4 +31,3 @@
   tags: leutils_cron
 
 # EOF
-...
