@@ -1,42 +1,47 @@
 ---
 
-- name: Debug
+- name: "Debug leutils_debug={{ leutils_debug }}"
   vars:
     msg: |-
-         ansible_architecture [{{ ansible_architecture }}]
-         ansible_os_family [{{ ansible_os_family }}]
-         ansible_distribution [{{ ansible_distribution }}]
-         ansible_distribution_major_version [{{ ansible_distribution_major_version }}]
-         ansible_distribution_version [{{ ansible_distribution_version }}]
-         ansible_distribution_release [{{ ansible_distribution_release }}]
-         ansible_python_version [{{ ansible_python_version }}]
+      leutils_role_version: {{ leutils_role_version }}
+      ansible_architecture: {{ ansible_architecture }}
+      ansible_os_family: {{ ansible_os_family }}
+      ansible_distribution: {{ ansible_distribution }}
+      ansible_distribution_major_version: {{ ansible_distribution_major_version }}
+      ansible_distribution_version: {{ ansible_distribution_version }}
+      ansible_distribution_release: {{ ansible_distribution_release }}
+      ansible_python_version: {{ ansible_python_version }}
 
-         leutils_backup_conf [{{ leutils_backup_conf }}]
-         leutils_days [{{ leutils_days }}]
-         leutils_days_enable [{{ leutils_days_enable }}]
-         leutils_list_command [{{ leutils_list_command }}]
-         leutils_dryrun [{{ leutils_dryrun }}]
-         leutils_dryrun_command [{{ leutils_dryrun_command }}]
-         leutils_renew [{{ leutils_renew }}]
-         leutils_renew_command [{{ leutils_renew_command }}]
-         leutils_ignore_lock [{{ leutils_ignore_lock }}]
-         leutils_source_version [{{ leutils_source_version }}]
-         leutils_unarchive_extra_opts [{{ leutils_unarchive_extra_opts }}]
-         leutils_config_file [{{ leutils_config_file }}]
-         leutils_config_webserver [{{ leutils_config_webserver }}]
-         leutils_config_leroot [{{ leutils_config_leroot }}]
-         leutils_config_lerootmtimepreserve
-         [{{ leutils_config_lerootmtimepreserve }}]
-         leutils_config_fingerprintfile [{{ leutils_config_fingerprintfile }}]
-         leutils_config_items
-         {{ leutils_config_items|to_yaml }}
-         leutils_fingerprint [{{ leutils_fingerprint }}]
-         leutils_fingerprint_command [{{ leutils_fingerprint_command }}]
-         leutils_install [{{ leutils_install }}]
-         leutils_packages
-         {{ leutils_packages|to_nice_yaml }}
-  debug:
-    msg: "{{ msg.split('\n') }}"
+      leutils_source_version: {{ leutils_source_version }}
+      leutils_source_dest: {{ leutils_source_dest }}
+      leutils_owner: {{ leutils_owner }}
+      leutils_group: {{ leutils_group }}
+      leutils_bin_dir: {{ leutils_bin_dir }}
+
+      leutils_install: {{ leutils_install }}
+      leutils_packages
+        {{ leutils_packages | to_nice_yaml(indent=2) | indent(2) }}
+      leutils_backup_conf: {{ leutils_backup_conf }}
+      leutils_days: {{ leutils_days }}
+      leutils_days_enable: {{ leutils_days_enable }}
+      leutils_list_command: {{ leutils_list_command }}
+      leutils_dryrun: {{ leutils_dryrun }}
+      leutils_dryrun_command: {{ leutils_dryrun_command }}
+      leutils_renew: {{ leutils_renew }}
+      leutils_renew_command: {{ leutils_renew_command }}
+      leutils_ignore_lock: {{ leutils_ignore_lock }}
+      leutils_unarchive_extra_opts: {{ leutils_unarchive_extra_opts }}
+
+      leutils_config_file: {{ leutils_config_file }}
+      leutils_config_webserver: {{ leutils_config_webserver }}
+      leutils_config_leroot: {{ leutils_config_leroot }}
+      leutils_config_lerootmtimepreserve: {{ leutils_config_lerootmtimepreserve }}
+      leutils_config_fingerprintfile: {{ leutils_config_fingerprintfile }}
+      leutils_config_items:
+        {{ leutils_config_items | to_yaml(indent=2) | indent(2) }}
+      leutils_fingerprint: {{ leutils_fingerprint }}
+      leutils_fingerprint_command: {{ leutils_fingerprint_command }}
+  ansible.builtin.debug:
+    msg: "{{ '{}'.format(msg) }}"
 
 # EOF
-...

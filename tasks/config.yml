@@ -1,6 +1,6 @@
 ---
 
-- name: "config: Create configuration in {{ leutils_config_file }}"
+- name: "Config: Create configuration in {{ leutils_config_file }}"
   ansible.builtin.lineinfile:
     dest: "{{ leutils_config_file }}"
     regexp: "{{ item.regexp }}"
@@ -12,7 +12,7 @@
     create: true
   loop: "{{ leutils_config_items }}"
 
-- name: "config: Create directory {{ leutils_config_leroot }}"
+- name: "Config: Create directory {{ leutils_config_leroot }}"
   ansible.builtin.file:
     state: directory
     path: "{{ leutils_config_leroot }}"
@@ -20,7 +20,7 @@
     group: "{{ leutils_group }}"
     mode: "{{ leutils_leroot_mode }}"
 
-- name: "config: Create directory {{ leutils_config_leroot }}/live"
+- name: "Config: Create directory {{ leutils_config_leroot ~ '/live' }}"
   ansible.builtin.file:
     state: directory
     path: "{{ leutils_config_leroot }}/live"
@@ -29,4 +29,3 @@
     mode: "{{ leutils_leroot_live_mode }}"
 
 # EOF
-...
