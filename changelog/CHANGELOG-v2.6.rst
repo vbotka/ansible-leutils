@@ -5,6 +5,21 @@ vbotka.leutils 2.6 Release Notes
 .. contents:: Topics
 
 
+2.6.2
+=====
+
+Release Summary
+---------------
+Maintenance update.
+
+Major Changes
+-------------
+
+Minor Changes
+-------------
+Fix lint errors.
+
+
 2.6.1
 =====
 

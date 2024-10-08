@@ -1,6 +1,6 @@
 ---
 # defaults vbotka.leutils
-leutils_role_version: 2.6.1
+leutils_role_version: 2.6.2
 
 leutils_install: true
 leutils_debug: false
