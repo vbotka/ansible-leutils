@@ -7,22 +7,22 @@
     user: "{{ leutils_cron_user }}"
 
 - name: "Cron: Configure cron check expiry of certificates"
+  when: leutils_days_enable | bool
   ansible.builtin.cron:
     name: check expiry of certificates
     minute: "{{ leutils_days_cron_minute }}"
     hour: "{{ leutils_days_cron_hour }}"
     job: "{{ leutils_list_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_days_enable | bool
 
 - name: "Cron: Configure cron dry-run renewal of certificates"
+  when: leutils_dryrun | bool
   ansible.builtin.cron:
     name: dry-run renewal of certificates
     minute: "{{ leutils_dryrun_cron_minute }}"
     hour: "{{ leutils_dryrun_cron_hour }}"
     job: "{{ leutils_dryrun_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_dryrun | bool
 
 - name: "Cron: Create script to renew certificates"
   ansible.builtin.template:
@@ -34,12 +34,12 @@
     backup: "{{ leutils_backup_conf }}"
 
 - name: "Cron: Configure cron renewal of certificates"
+  when: leutils_renew | bool
   ansible.builtin.cron:
     name: renewal of certificates
     minute: "{{ leutils_renew_cron_minute }}"
     hour: "{{ leutils_renew_cron_hour }}"
     job: "{{ leutils_renew_command }}"
     user: "{{ leutils_cron_user }}"
-  when: leutils_renew | bool
 
 # EOF

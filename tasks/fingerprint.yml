@@ -1,10 +1,10 @@
 ---
 
 - name: "Fingerprint: Create {{ leutils_config_FINGERPRINTFILE }}"
+  when: leutils_fingerprint | bool
   ansible.builtin.command:
     cmd: "{{ leutils_fingerprint_command }}"
   changed_when: false
-  when: leutils_fingerprint | bool
 
 # TODO: Make idempotent. With checksum?
 
