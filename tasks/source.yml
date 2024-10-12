@@ -5,17 +5,17 @@
   block:
 
     - name: "Source: Test presence of {{ leutils_source_dest ~ '/le-utils-current.lock' }}"
+      register: leutils_lock
       ansible.builtin.stat:
         path: "{{ leutils_source_dest }}/le-utils-current.lock"
-      register: leutils_lock
 
     - name: "Source: Debug le-utils-current.lock leutils_debug={{ leutils_debug }}"
-      ansible.builtin.debug:
-        msg: |
-          [LOCK] le-utils-current.lock file is present. Link to source will not be created.
       when:
         - leutils_lock.stat.exists
         - leutils_debug | bool
+      ansible.builtin.debug:
+        msg: |
+          [LOCK] le-utils-current.lock file is present. Link to source will not be created.
 
 - name: Download source
   tags: leutils_download
@@ -28,24 +28,27 @@
         mode: "{{ leutils_source_dest_mode }}"
 
     - name: "Source: Download {{ leutils_source_url ~ '/' ~ leutils_source_file }}"
+      environment:
+        CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
       ansible.builtin.get_url:
         url: "{{ leutils_source_url }}/{{ leutils_source_file }}"
         dest: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
         mode: "0644"
         checksum: "{{ leutils_source_checksum }}"
-      environment:
-        CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
 
 - name: Extract source
   tags: leutils_extract
   block:
 
     - name: "Source: Check existence of {{ leutils_source_url ~ '/' ~ leutils_source_file }}"
+      register: leutils_source_file_downloaded
       ansible.builtin.stat:
         path: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
-      register: leutils_source_file_downloaded
 
     - name: "Source: Extract sources to {{ leutils_source_dest ~ '/' ~ leutils_source_dir }}"
+      when: leutils_source_file_downloaded.stat.exists
+      environment:
+        CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
       ansible.builtin.unarchive:
         src: "{{ leutils_source_dest }}/le-utils-{{ leutils_source_file }}"
         dest: "{{ leutils_source_dest }}"
@@ -53,38 +56,35 @@
         remote_src: true
         keep_newer: true
         creates: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
-      environment:
-        CRYPTOGRAPHY_OPENSSL_NO_LEGACY: '1'
-      when: leutils_source_file_downloaded.stat.exists
 
 - name: "Source: Debug leutils_lock leutils_debug={{ leutils_debug }}"
+  when: leutils_debug | bool
   ansible.builtin.debug:
     msg: |
       leutils_lock.stat.exists: {{ leutils_lock.stat.exists }}
       leutils_ignore_lock: {{ leutils_ignore_lock }}
-  when: leutils_debug | bool
 
 - name: "Source: Create symbolic link le-utils to {{ leutils_source_dir }}"
+  when: not leutils_lock.stat.exists or leutils_ignore_lock | bool
   ansible.builtin.file:
     state: link
     src: "{{ leutils_source_dest }}/{{ leutils_source_dir }}"
     dest: "{{ leutils_source_dest }}/le-utils"
     force: true
-  when: not leutils_lock.stat.exists or leutils_ignore_lock | bool
 
 - name: Update bash path in scripts
   block:
 
     - name: "Source: Which bash"
-      ansible.builtin.command: which bash
       register: leutils_which_bash
       check_mode: false
       changed_when: false
+      ansible.builtin.command: which bash
 
     - name: "Source: Debug leutils_which_bash leutils_debug={{ leutils_debug }}"
+      when: leutils_debug | bool
       ansible.builtin.debug:
         var: leutils_which_bash.stdout | trim
-      when: leutils_debug | bool
 
     - name: "Source: Patch {{ leutils_which_bash.stdout }}"
       ansible.builtin.lineinfile:
@@ -94,6 +94,5 @@
       loop:
         - lectl
         - leinfo
-      when: not ansible_check_mode
 
 # EOF
